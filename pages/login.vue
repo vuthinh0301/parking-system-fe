@@ -25,8 +25,7 @@
             class="font-weight-bolder text-center font-size-h4 font-size-h1-lg"
             style="color: #986923"
           >
-            EduVR <br />
-            Hệ quản trị nội dung
+            Parking system management <br />
           </h3>
         </div>
         <div
