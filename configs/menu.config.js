@@ -1,14 +1,8 @@
 import { MANAGE } from '~/constants/permission-action.constant'
 import {
-  CATEGORY,
-  CHARACTER,
-  LESSON,
-  PAGE,
   PERMISSION,
   ROLE,
-  SELF_REVIEW,
-  SPATIAL,
-  USER,
+  USER, VEHICLE,
 } from '~/constants/permission-object.constant'
 
 export default [
@@ -18,33 +12,24 @@ export default [
     route: '/',
   },
   {
-    title: 'Quản lý nội dung học',
-    icon: 'flaticon2-digital-marketing',
+    title: 'Quản lý phương tiện',
+    icon: 'flaticon-truck',
+    route: '/vehicle',
+    permission: [MANAGE, VEHICLE],
+  },
+  {
+    title: 'Quản lý vé',
+    icon: 'flaticon-tabs',
     subMenus: [
       {
-        title: 'Quản lý danh mục',
-        route: '/category',
-        permission: [MANAGE, CATEGORY],
+        title: 'Vé tháng',
+        route: '/monthly-card',
+        permission: [MANAGE, ROLE],
       },
       {
-        title: 'Bài học',
-        route: '/lesson',
-        permission: [MANAGE, LESSON],
-      },
-      {
-        title: 'Nhân vật',
-        route: '/character',
-        permission: [MANAGE, CHARACTER],
-      },
-      {
-        title: 'Không gian học',
-        route: '/spatial',
-        permission: [MANAGE, SPATIAL],
-      },
-      {
-        title: 'Trang',
-        route: '/page',
-        permission: [MANAGE, PAGE],
+        title: 'Vé lượt',
+        route: '/daily-card',
+        permission: [MANAGE, PERMISSION],
       },
     ],
   },
@@ -69,11 +54,5 @@ export default [
         permission: [MANAGE, PERMISSION],
       },
     ],
-  },
-  {
-    title: 'Nhận xét người dùng',
-    icon: 'flaticon2-chat',
-    route: '/self-review',
-    permission: [MANAGE, SELF_REVIEW],
   },
 ]
