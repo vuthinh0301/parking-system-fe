@@ -2,7 +2,8 @@ import { MANAGE } from '~/constants/permission-action.constant'
 import {
   PERMISSION,
   ROLE,
-  USER, VEHICLE,
+  USER,
+  VEHICLE,
 } from '~/constants/permission-object.constant'
 
 export default [

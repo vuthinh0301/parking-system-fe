@@ -10,18 +10,19 @@
         ref="table"
         :columns="columns"
         remote-url="/vehicles"
-        @editRow="editPermission"
-        @deleteRow="deletePermission"
+        @editRow="editVehicle"
+        @deleteRow="deleteVehicle"
       />
 
-      <permission-modal ref="modal" :on-action-success="reloadData"/>
+      <vehicle-modal ref="modal" :on-action-success="reloadData" />
     </template>
   </content-card>
 </template>
 
 <script>
-import {MANAGE} from '~/constants/permission-action.constant'
-import {VEHICLE} from '~/constants/permission-object.constant'
+import { MANAGE } from '~/constants/permission-action.constant'
+import { VEHICLE } from '~/constants/permission-object.constant'
+import VehicleModal from '~/components/features/vehicle/Modal'
 
 const columns = [
   {
@@ -48,14 +49,12 @@ const columns = [
     key: 'd',
     title: 'Chủ sở hữu',
     align: 'left',
-    renderBodyCell: ({ row, column }, h) => {
-      return <span>{row.owner.email}</span>
-    },
-  }
+  },
 ]
 
 export default {
-  name: "VehiclePage",
+  name: 'VehiclePage',
+  components: { VehicleModal },
   pageTitle: 'Quản lý phương tiện',
   permission: [MANAGE, VEHICLE],
   data() {
@@ -75,12 +74,15 @@ export default {
     },
     deleteVehicle(vehicle) {
       this.$bvModal
-        .msgBoxConfirm(`Bạn chắc chắn muốn xóa phương tiện "${vehicle.plateNumber}"?`, {
-          title: 'Cảnh báo',
-          okVariant: 'danger',
-          okTitle: 'Đồng ý',
-          cancelTitle: 'Hủy bỏ',
-        })
+        .msgBoxConfirm(
+          `Bạn chắc chắn muốn xóa phương tiện "${vehicle.plateNumber}"?`,
+          {
+            title: 'Cảnh báo',
+            okVariant: 'danger',
+            okTitle: 'Đồng ý',
+            cancelTitle: 'Hủy bỏ',
+          }
+        )
         .then(async (value) => {
           if (value) {
             await this.$axios.delete('/vehicles/' + vehicle._id)

@@ -84,7 +84,6 @@ export default {
       if (item) {
         this.isEdit = true
         // eslint-disable-next-line no-console
-        console.log(item)
         this.form = cloneDeep(item)
 
         const status = userStatusConstant.find((o) => o.id === item.status)
