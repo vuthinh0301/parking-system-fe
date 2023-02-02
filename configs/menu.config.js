@@ -1,5 +1,7 @@
 import { MANAGE } from '~/constants/permission-action.constant'
 import {
+  MONTHLY_CARD,
+  MONTHLY_CARD_REGISTER,
   PERMISSION,
   ROLE,
   USER,
@@ -25,7 +27,12 @@ export default [
       {
         title: 'Vé tháng',
         route: '/monthly-card',
-        permission: [MANAGE, ROLE],
+        permission: [MANAGE, MONTHLY_CARD],
+      },
+      {
+        title: 'Quản lý đăng kí vé tháng',
+        route: '/monthly-card-register',
+        permission: [MANAGE, MONTHLY_CARD_REGISTER],
       },
       {
         title: 'Vé lượt',
