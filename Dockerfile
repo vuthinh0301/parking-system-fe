@@ -7,11 +7,11 @@ WORKDIR /usr/src/nuxt-app
 # copy the app, note .dockerignore
 COPY . /usr/src/nuxt-app/
 RUN cp .env.production .env
-RUN npm install
+RUN yarn install
 
 # build necessary, even if no static files are needed,
 # since it builds the server as well
-RUN npm run generate
+RUN yarn run generate
 
 # expose 5000 on container
 EXPOSE 3000
@@ -22,4 +22,4 @@ ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=3000
 
 # start the app
-CMD [ "npm", "start" ]
+CMD [ "yarn", "start" ]
