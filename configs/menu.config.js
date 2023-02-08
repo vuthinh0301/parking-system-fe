@@ -1,5 +1,6 @@
 import { MANAGE } from '~/constants/permission-action.constant'
 import {
+  DAILY_VEHICLE,
   MONTHLY_CARD,
   MONTHLY_CARD_REGISTER,
   PERMISSION,
@@ -17,8 +18,18 @@ export default [
   {
     title: 'Quản lý phương tiện',
     icon: 'flaticon-truck',
-    route: '/vehicle',
-    permission: [MANAGE, VEHICLE],
+    subMenus: [
+      {
+        title: 'Phương tiện đăng kí vé tháng',
+        route: '/vehicle',
+        permission: [MANAGE, VEHICLE],
+      },
+      {
+        title: 'Phương tiện vãng lai',
+        route: '/daily-vehicle',
+        permission: [MANAGE, DAILY_VEHICLE],
+      },
+    ],
   },
   {
     title: 'Quản lý vé',
