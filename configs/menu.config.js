@@ -1,9 +1,11 @@
 import { MANAGE } from '~/constants/permission-action.constant'
 import {
   DAILY_CARD,
+  DAILY_PARKING,
   DAILY_VEHICLE,
   MONTHLY_CARD,
   MONTHLY_CARD_REGISTER,
+  MONTHLY_PARKING,
   PERMISSION,
   ROLE,
   USER,
@@ -50,6 +52,22 @@ export default [
         title: 'Vé lượt',
         route: '/daily-card',
         permission: [MANAGE, DAILY_CARD],
+      },
+    ],
+  },
+  {
+    title: 'Quản lý ra vào',
+    icon: 'flaticon-lifebuoy',
+    subMenus: [
+      {
+        title: 'Vé tháng',
+        route: '/monthly-parking',
+        permission: [MANAGE, MONTHLY_PARKING],
+      },
+      {
+        title: 'Vé lượt',
+        route: '/daily-parking',
+        permission: [MANAGE, DAILY_PARKING],
       },
     ],
   },
