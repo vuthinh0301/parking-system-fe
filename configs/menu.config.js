@@ -1,5 +1,6 @@
 import { MANAGE } from '~/constants/permission-action.constant'
 import {
+  DAILY_CARD,
   DAILY_VEHICLE,
   MONTHLY_CARD,
   MONTHLY_CARD_REGISTER,
@@ -48,7 +49,7 @@ export default [
       {
         title: 'Vé lượt',
         route: '/daily-card',
-        permission: [MANAGE, PERMISSION],
+        permission: [MANAGE, DAILY_CARD],
       },
     ],
   },

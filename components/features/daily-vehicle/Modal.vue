@@ -106,7 +106,7 @@ export default {
       try {
         const form = this.processFormToSubmit()
         this.vForm = new Form(form)
-        await this.vForm.post(this.$axios.defaults.baseURL + '/vehicles')
+        await this.vForm.post(this.$axios.defaults.baseURL + '/daily-vehicles')
 
         this.$notifyAddSuccess('phương tiện')
         this.$refs.modal.hide()
@@ -120,7 +120,7 @@ export default {
         const form = this.processFormToSubmit()
         this.vForm = new Form(form)
         await this.vForm.patch(
-          this.$axios.defaults.baseURL + '/vehicles/' + this.form._id
+          this.$axios.defaults.baseURL + '/daily-vehicles/' + this.form._id
         )
 
         this.$notifyUpdateSuccess('phương tiện')

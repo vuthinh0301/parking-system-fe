@@ -9,12 +9,12 @@
       <base-table
         ref="table"
         :columns="columns"
-        remote-url="/vehicles"
+        remote-url="/daily-vehicles"
         @editRow="editVehicle"
         @deleteRow="deleteVehicle"
       />
 
-      <vehicle-modal ref="modal" :on-action-success="reloadData" />
+      <daily-vehicle-modal ref="modal" :on-action-success="reloadData" />
     </template>
   </content-card>
 </template>
@@ -22,7 +22,6 @@
 <script>
 import { MANAGE } from '~/constants/permission-action.constant'
 import { DAILY_VEHICLE } from '~/constants/permission-object.constant'
-import VehicleModal from '~/components/features/daily-vehicle/Modal'
 
 const columns = [
   {
@@ -48,7 +47,6 @@ const columns = [
 
 export default {
   name: 'VehiclePage',
-  components: { VehicleModal },
   pageTitle: 'Quản lý phương tiện vãng lai',
   permission: [MANAGE, DAILY_VEHICLE],
   data() {
