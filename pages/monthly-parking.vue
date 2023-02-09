@@ -9,7 +9,7 @@
         @deleteRow="deleteMonthlyCardRegister"
       />
 
-      <monthly-card-modal ref="modal" :on-action-success="reloadData" />
+      <monthly-parking-modal ref="modal" :on-action-success="reloadData" />
     </template>
   </content-card>
 </template>
@@ -17,8 +17,7 @@
 <script>
 import dayjs from 'dayjs'
 import { MANAGE } from '~/constants/permission-action.constant'
-import { MONTHLY_CARD_REGISTER } from '~/constants/permission-object.constant'
-import MonthlyCardModal from '~/components/features/monthly-card/Modal'
+import { MONTHLY_PARKING } from '~/constants/permission-object.constant'
 
 const columns = [
   {
@@ -29,36 +28,48 @@ const columns = [
     sortBy: 'asc',
   },
   {
-    field: 'registerDate',
+    field: 'checkin',
     key: 'b',
-    title: 'Ngày đăng kí',
+    title: 'Giờ vào',
     align: 'left',
     renderBodyCell: ({ row, column }, h) => {
-      return <span>{dayjs(row.registerDate).format('HH:mm:ss')}</span>
+      return <span>{dayjs(row.checkin).format('DD/MM/YYYY HH:mm:ss')}</span>
     },
   },
   {
-    field: 'expiredDate',
+    field: 'checkout',
     key: 'c',
-    title: 'Ngày hết hạn',
+    title: 'Giờ ra',
     align: 'left',
     renderBodyCell: ({ row, column }, h) => {
-      return <span>{dayjs(row.expiriedDate).format('DD/MM/YYYY')}</span>
+      return (
+        <span>
+          {row.checkout !== 0
+            ? dayjs(row.checkout).format('DD/MM/YYYY HH:mm:ss')
+            : ''}
+        </span>
+      )
     },
   },
   {
-    field: 'amount',
+    field: 'status',
     key: 'd',
-    title: 'Phí (VND)',
+    title: 'Trạng thái',
     align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      if (row.status) {
+        return <span class="text-success">Đã ra</span>
+      } else {
+        return <span class="text-danger">Chưa ra</span>
+      }
+    },
   },
 ]
 
 export default {
-  name: 'MonthlyCardPage',
-  components: { MonthlyCardModal },
-  pageTitle: 'Quản lý vé đăng kí vé tháng',
-  permission: [MANAGE, MONTHLY_CARD_REGISTER],
+  name: 'MonthlyParkingPage',
+  pageTitle: 'Quản lý vào ra vé tháng',
+  permission: [MANAGE, MONTHLY_PARKING],
   data() {
     return {
       columns,
@@ -71,13 +82,13 @@ export default {
     reloadData() {
       this.$refs.table.loadData()
     },
-    editMonthlyCardRegister(monthlyCardRegister) {
-      this.$refs.modal.show(monthlyCardRegister)
+    editMonthlyCardRegister(monthlyParking) {
+      this.$refs.modal.show(monthlyParking)
     },
-    deleteMonthlyCardRegister(monthlyCardRegister) {
+    deleteMonthlyCardRegister(monthlyParking) {
       this.$bvModal
         .msgBoxConfirm(
-          `Bạn chắc chắn muốn xóa đăng kí vé "${monthlyCardRegister._id}"?`,
+          `Bạn chắc chắn muốn xóa lượt vào ra "${monthlyParking._id}"?`,
           {
             title: 'Cảnh báo',
             okVariant: 'danger',
@@ -87,10 +98,8 @@ export default {
         )
         .then(async (value) => {
           if (value) {
-            await this.$axios.delete(
-              '/monthly-card-register/' + monthlyCardRegister._id
-            )
-            this.$notifyDeleteSuccess('vé')
+            await this.$axios.delete('/monthly-parking/' + monthlyParking._id)
+            this.$notifyDeleteSuccess('lượt vào ra')
             this.reloadData()
           }
         })

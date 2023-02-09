@@ -43,7 +43,7 @@ const columns = [
     title: 'Ngày hết hạn',
     align: 'left',
     renderBodyCell: ({ row, column }, h) => {
-      return <span>{dayjs(row.expiriedDate).format('DD/MM/YYYY')}</span>
+      return <span>{dayjs(row.expiredDate).format('DD/MM/YYYY')}</span>
     },
   },
   {
