@@ -102,7 +102,6 @@ import cloneDeep from 'lodash/cloneDeep'
 import { Form } from 'vform'
 import dayjs from 'dayjs'
 import BaseFormModal from '~/components/base/form/Modal'
-import cardStatus from '~/constants/monthly-card-status.constant'
 
 const defaultForm = {
   card: '',
@@ -113,7 +112,7 @@ const defaultForm = {
   checkinImageBehind: '',
   checkoutImageFront: '',
   checkoutImageBehind: '',
-  status: false,
+  status: true,
 }
 export default {
   name: 'MonthlyParkingModal',
@@ -129,10 +128,6 @@ export default {
         this.isEdit = true
         // eslint-disable-next-line no-console
         this.form = cloneDeep(item)
-
-        const status = cardStatus.find((o) => o.id === item.status)
-
-        this.form.status = status
 
         this.form.checkin = dayjs(this.form.checkin).format(
           'DD/MM/YYYY HH:mm:ss'
@@ -151,8 +146,7 @@ export default {
       this.isEdit = false
     },
     processFormToSubmit() {
-      const form = cloneDeep(this.form)
-      return form
+      return cloneDeep(this.form)
     },
     async addItem() {
       try {

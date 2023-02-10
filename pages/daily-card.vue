@@ -26,6 +26,12 @@ import DailyCardModal from '~/components/features/daily-card/Modal'
 
 const columns = [
   {
+    field: '_id',
+    key: 'a',
+    title: 'Id vé',
+    align: 'left',
+  },
+  {
     field: 'status',
     key: 'c',
     title: 'Trạng thái vé',

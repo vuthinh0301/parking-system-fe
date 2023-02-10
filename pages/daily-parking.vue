@@ -4,7 +4,7 @@
       <base-table
         ref="table"
         :columns="columns"
-        remote-url="/monthly-parking"
+        remote-url="/daily-parking"
         @editRow="editMonthlyCardRegister"
         @deleteRow="deleteMonthlyCardRegister"
       />
@@ -67,8 +67,8 @@ const columns = [
 ]
 
 export default {
-  name: 'MonthlyParkingPage',
-  pageTitle: 'Quản lý vào ra vé tháng',
+  name: 'DailyParkingPage',
+  pageTitle: 'Quản lý vào ra vé lượt',
   permission: [MANAGE, MONTHLY_PARKING],
   data() {
     return {

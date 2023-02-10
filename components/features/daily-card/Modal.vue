@@ -11,7 +11,7 @@
     @hidden="handleModalHidden"
   >
     <validation-observer ref="observer">
-      <monthly-card-status-select
+      <daily-card-status-select
         v-model="form.status"
         required
         :error="vForm.errors.get('status')"
@@ -29,14 +29,14 @@ import cloneDeep from 'lodash/cloneDeep'
 import { Form } from 'vform'
 import BaseFormModal from '~/components/base/form/Modal'
 import cardStatus from '~/constants/monthly-card-status.constant'
-import MonthlyCardStatusSelect from '~/components/features/monthly-card/StatusSelect'
+import DailyCardStatusSelect from '~/components/features/daily-card/StatusSelect'
 
 const defaultForm = {
   status: null,
 }
 export default {
   name: 'DailyCardModal',
-  components: { MonthlyCardStatusSelect },
+  components: { DailyCardStatusSelect },
   mixins: [BaseFormModal],
   data() {
     return {

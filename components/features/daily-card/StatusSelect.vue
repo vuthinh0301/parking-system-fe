@@ -20,7 +20,7 @@ import cloneDeep from 'lodash/cloneDeep'
 import status from '~/constants/monthly-card-status.constant'
 
 export default {
-  name: 'MonthlyCardStatusSelect',
+  name: 'DailyCardStatusSelect',
   props: {
     error: {
       type: String,
