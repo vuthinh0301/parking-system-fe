@@ -3,7 +3,7 @@
   <div id="kt_brand" ref="kt_brand" class="brand flex-column-auto">
     <div class="brand-logo">
       <nuxt-link to="/">
-        <img :src="siteLogo()" alt="Logo" />
+        <!--        <img :src="siteLogo()" alt="Logo" />-->
       </nuxt-link>
     </div>
     <div v-if="allowMinimize" class="brand-tools">
