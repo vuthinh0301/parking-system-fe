@@ -1,5 +1,5 @@
 <template>
-  <content-card title="Danh sách ra vào bằng vé tháng">
+  <content-card title="Danh sách ra vào bằng vé lượt">
     <template #body>
       <base-table
         ref="table"
