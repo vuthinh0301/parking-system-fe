@@ -5,11 +5,11 @@
         ref="table"
         :columns="columns"
         remote-url="/daily-parking"
-        @editRow="editMonthlyCardRegister"
-        @deleteRow="deleteMonthlyCardRegister"
+        @editRow="editDailyCardRegister"
+        @deleteRow="deleteDailyCardRegister"
       />
 
-      <monthly-parking-modal ref="modal" :on-action-success="reloadData" />
+      <daily-parking-modal ref="modal" :on-action-success="reloadData" />
     </template>
   </content-card>
 </template>
@@ -18,6 +18,7 @@
 import dayjs from 'dayjs'
 import { MANAGE } from '~/constants/permission-action.constant'
 import { MONTHLY_PARKING } from '~/constants/permission-object.constant'
+import DailyParkingModal from '~/components/features/daily-parking/Modal'
 
 const columns = [
   {
@@ -68,6 +69,7 @@ const columns = [
 
 export default {
   name: 'DailyParkingPage',
+  components: { DailyParkingModal },
   pageTitle: 'Quản lý vào ra vé lượt',
   permission: [MANAGE, MONTHLY_PARKING],
   data() {
@@ -82,13 +84,13 @@ export default {
     reloadData() {
       this.$refs.table.loadData()
     },
-    editMonthlyCardRegister(monthlyParking) {
-      this.$refs.modal.show(monthlyParking)
+    editDailyCardRegister(dailyParking) {
+      this.$refs.modal.show(dailyParking)
     },
-    deleteMonthlyCardRegister(monthlyParking) {
+    deleteDailyCardRegister(dailyParking) {
       this.$bvModal
         .msgBoxConfirm(
-          `Bạn chắc chắn muốn xóa lượt vào ra "${monthlyParking._id}"?`,
+          `Bạn chắc chắn muốn xóa lượt vào ra "${dailyParking._id}"?`,
           {
             title: 'Cảnh báo',
             okVariant: 'danger',
@@ -98,7 +100,7 @@ export default {
         )
         .then(async (value) => {
           if (value) {
-            await this.$axios.delete('/monthly-parking/' + monthlyParking._id)
+            await this.$axios.delete('/daily-parking/' + dailyParking._id)
             this.$notifyDeleteSuccess('lượt vào ra')
             this.reloadData()
           }

@@ -93,4 +93,9 @@ export default [
       },
     ],
   },
+  {
+    title: 'Thanh toán',
+    icon: 'flaticon-piggy-bank',
+    route: '/',
+  },
 ]
