@@ -28,6 +28,24 @@ const columns = [
     sortBy: 'asc',
   },
   {
+    field: 'vehicle',
+    key: 's',
+    title: 'Biển kiểm soát',
+    align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.vehicle.plateNumber}</span>
+    },
+  },
+  {
+    field: 'vehicle',
+    key: 't',
+    title: 'Chủ xe',
+    align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.vehicle.owner.fullName}</span>
+    },
+  },
+  {
     field: 'checkin',
     key: 'b',
     title: 'Giờ vào',

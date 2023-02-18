@@ -22,7 +22,7 @@
       />
 
       <base-form-text-input
-        v-model="form.vehicle"
+        v-model="form.vehicle._id"
         required
         :error="vForm.errors.get('vehicle')"
         placeholder="Id phương tiện"

@@ -36,6 +36,13 @@ export default {
     return {
       columns: [
         {
+          field: '_id',
+          key: 's',
+          title: 'ID người dùng',
+          align: 'left',
+          sortBy: 'asc',
+        },
+        {
           field: 'email',
           key: 'a',
           title: 'Email',

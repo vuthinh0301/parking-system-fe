@@ -1,5 +1,10 @@
 <template>
   <content-card title="Danh sách đăng kí vé tháng">
+    <template #toolbar>
+      <b-button variant="primary" @click="show">
+        <i class="flaticon2-plus"></i> Thêm mới
+      </b-button>
+    </template>
     <template #body>
       <base-table
         ref="table"
@@ -9,7 +14,10 @@
         @deleteRow="deleteMonthlyCardRegister"
       />
 
-      <monthly-card-modal ref="modal" :on-action-success="reloadData" />
+      <monthly-card-register-modal
+        ref="modal"
+        :on-action-success="reloadData"
+      />
     </template>
   </content-card>
 </template>
@@ -18,7 +26,7 @@
 import dayjs from 'dayjs'
 import { MANAGE } from '~/constants/permission-action.constant'
 import { MONTHLY_CARD_REGISTER } from '~/constants/permission-object.constant'
-import MonthlyCardModal from '~/components/features/monthly-card/Modal'
+import MonthlyCardRegisterModal from '~/components/features/monthly-card-register/Modal'
 
 const columns = [
   {
@@ -27,6 +35,27 @@ const columns = [
     title: 'Id vé',
     align: 'left',
     sortBy: 'asc',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.card._id}</span>
+    },
+  },
+  {
+    field: 'card',
+    key: 'e',
+    title: 'Chủ xe',
+    align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.card.owner.fullName}</span>
+    },
+  },
+  {
+    field: 'card',
+    key: 'f',
+    title: 'Biển kiểm soát',
+    align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.card.vehicle.plateNumber}</span>
+    },
   },
   {
     field: 'registerDate',
@@ -56,7 +85,7 @@ const columns = [
 
 export default {
   name: 'MonthlyCardPage',
-  components: { MonthlyCardModal },
+  components: { MonthlyCardRegisterModal },
   pageTitle: 'Quản lý vé đăng kí vé tháng',
   permission: [MANAGE, MONTHLY_CARD_REGISTER],
   data() {

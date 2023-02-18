@@ -26,29 +26,50 @@ import VehicleModal from '~/components/features/vehicle/Modal'
 
 const columns = [
   {
-    field: 'plateNumber',
+    field: '_id',
     key: 'a',
+    width: 100,
+    title: 'Id phương tiện',
+    align: 'left',
+    sortBy: 'asc',
+  },
+  {
+    field: 'plateNumber',
+    key: 'b',
     title: 'Biển kiểm soát',
     align: 'left',
     sortBy: 'asc',
   },
   {
     field: 'type',
-    key: 'b',
+    key: 'c',
     title: 'Loại xe',
     align: 'left',
   },
   {
     field: 'description',
-    key: 'c',
+    key: 'd',
     title: 'Mô tả',
     align: 'left',
   },
   {
     field: 'owner',
-    key: 'd',
-    title: 'Chủ sở hữu',
+    key: 'e',
+    width: 100,
+    title: 'ID chủ sở hữu',
     align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.owner?._id}</span>
+    },
+  },
+  {
+    field: 'owner',
+    key: 'f',
+    title: 'Tên chủ sở hữu',
+    align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.owner?.fullName}</span>
+    },
   },
 ]
 

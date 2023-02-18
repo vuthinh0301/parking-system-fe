@@ -22,7 +22,7 @@
       />
 
       <base-form-text-input
-        v-model="form.vehicle"
+        v-model="form.vehicle._id"
         required
         :error="vForm.errors.get('vehicle')"
         placeholder="Id phương tiện"
@@ -82,7 +82,7 @@
           rules="required"
         />
         <base-form-image-upload
-          v-model="form.checkinImageBehind"
+          v-model="form.checkoutImageBehind"
           class="ml-4"
           action="/files/upload-hash-image"
           accept="image/*"

@@ -30,23 +30,51 @@ const columns = [
     key: 'a',
     title: 'Id chủ vé',
     align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.owner._id}</span>
+    },
     sortBy: 'asc',
+  },
+  {
+    field: 'owner',
+    key: 'e',
+    width: 150,
+    title: 'Tên chủ vé',
+    align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.owner.fullName}</span>
+    },
   },
   {
     field: 'vehicle',
     key: 'b',
     title: 'Id phương tiện',
     align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.vehicle._id}</span>
+    },
+  },
+  {
+    field: 'vehicle',
+    key: 'f',
+    width: 100,
+    title: 'Biển kiểm soát',
+    align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.vehicle.plateNumber}</span>
+    },
   },
   {
     field: 'status',
     key: 'c',
     title: 'Trạng thái vé',
+    width: 60,
     align: 'left',
   },
   {
     field: 'balance',
     key: 'd',
+    width: 80,
     title: 'Số dư vé (VND)',
     align: 'left',
   },
