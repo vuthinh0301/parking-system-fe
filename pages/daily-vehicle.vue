@@ -25,21 +25,28 @@ import { DAILY_VEHICLE } from '~/constants/permission-object.constant'
 
 const columns = [
   {
-    field: 'plateNumber',
+    field: '_id',
     key: 'a',
+    title: 'ID phương tiện',
+    align: 'left',
+    sortBy: 'asc',
+  },
+  {
+    field: 'plateNumber',
+    key: 'b',
     title: 'Biển kiểm soát',
     align: 'left',
     sortBy: 'asc',
   },
   {
     field: 'type',
-    key: 'b',
+    key: 'c',
     title: 'Loại xe',
     align: 'left',
   },
   {
     field: 'description',
-    key: 'c',
+    key: 'd',
     title: 'Mô tả',
     align: 'left',
   },

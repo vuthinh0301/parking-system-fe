@@ -32,7 +32,7 @@
       />
 
       <base-form-text-input
-        v-model="form.owner"
+        v-model="form.owner._id"
         required
         :error="vForm.errors.get('owner')"
         placeholder="Id chủ phương tiện"
@@ -71,7 +71,7 @@ import vehicleType from '~/constants/vehicle-type.constant'
 
 const defaultForm = {
   plateNumber: '',
-  owner: '',
+  owner: {},
   type: null,
   description: '',
   image: '',
@@ -108,9 +108,11 @@ export default {
     processFormToSubmit() {
       const form = cloneDeep(this.form)
       form.type = form.type.id
+      form.owner = form.owner._id
 
       return form
     },
+
     async addItem() {
       try {
         const form = this.processFormToSubmit()

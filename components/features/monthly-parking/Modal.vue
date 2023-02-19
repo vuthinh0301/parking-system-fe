@@ -22,7 +22,7 @@
       />
 
       <base-form-text-input
-        v-model="form.vehicle"
+        v-model="form.vehicle._id"
         required
         :error="vForm.errors.get('vehicle')"
         placeholder="Id phương tiện"
@@ -82,7 +82,7 @@
           rules="required"
         />
         <base-form-image-upload
-          v-model="form.checkinImageBehind"
+          v-model="form.checkoutImageBehind"
           class="ml-4"
           action="/files/upload-hash-image"
           accept="image/*"
@@ -105,7 +105,7 @@ import BaseFormModal from '~/components/base/form/Modal'
 
 const defaultForm = {
   card: '',
-  vehicle: '',
+  vehicle: {},
   checkin: 0,
   checkout: 0,
   checkinImageFront: '',
@@ -146,7 +146,10 @@ export default {
       this.isEdit = false
     },
     processFormToSubmit() {
-      return cloneDeep(this.form)
+      const form = cloneDeep(this.form)
+      form.vehicle = form.vehicle._id
+
+      return form
     },
     async addItem() {
       try {

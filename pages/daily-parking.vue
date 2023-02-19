@@ -29,6 +29,15 @@ const columns = [
     sortBy: 'asc',
   },
   {
+    field: 'vehicle',
+    key: 's',
+    title: 'Biểm kiểm soát',
+    align: 'left',
+    renderBodyCell: ({ row, column }, h) => {
+      return <span>{row.vehicle.plateNumber}</span>
+    },
+  },
+  {
     field: 'checkin',
     key: 'b',
     title: 'Giờ vào',

@@ -11,43 +11,24 @@
     @hidden="handleModalHidden"
   >
     <validation-observer ref="observer">
-      <monthly-card-status-select
-        v-model="form.status"
+      <base-form-text-input
+        v-model="form.card._id"
         required
-        :error="vForm.errors.get('status')"
-        placeholder="Trạng thái vé"
-        label="Trạng thái vé"
+        :error="vForm.errors.get('card')"
+        placeholder="ID vé tháng"
+        label="ID vé tháng"
         rules="required|max:100"
-        name="status"
+        name="card"
       />
 
       <base-form-text-input
-        v-model="form.owner._id"
+        v-model="form.amount"
         required
-        :error="vForm.errors.get('owner')"
-        placeholder="Id chủ vé"
-        label="Id chủ vé"
+        :error="vForm.errors.get('amount')"
+        placeholder="Phí(VND)"
+        label="Phí(VND)"
         rules="required|max:100"
-        name="owner"
-      />
-
-      <base-form-text-input
-        v-model="form.vehicle._id"
-        required
-        :error="vForm.errors.get('vehicle')"
-        placeholder="Id phương tiện"
-        label="Id phương tiện"
-        rules="required|max:100"
-        name="vehicle"
-      />
-      <base-form-text-input
-        v-model="form.balance"
-        required
-        :error="vForm.errors.get('plateNumber')"
-        placeholder="Số dư vé"
-        label="Số dư vé (VND)"
-        rules="required|max:100"
-        name="balance"
+        name="amount"
       />
     </validation-observer>
   </b-modal>
@@ -57,18 +38,13 @@
 import cloneDeep from 'lodash/cloneDeep'
 import { Form } from 'vform'
 import BaseFormModal from '~/components/base/form/Modal'
-import cardStatus from '~/constants/monthly-card-status.constant'
-import MonthlyCardStatusSelect from '~/components/features/monthly-card/StatusSelect'
 
 const defaultForm = {
-  owner: {},
-  vehicle: {},
-  status: null,
+  card: {},
   balance: 0,
 }
 export default {
-  name: 'MonthlyCardModal',
-  components: { MonthlyCardStatusSelect },
+  name: 'MonthlyCardRegisterModal',
   mixins: [BaseFormModal],
   data() {
     return {
@@ -81,10 +57,6 @@ export default {
         this.isEdit = true
         // eslint-disable-next-line no-console
         this.form = cloneDeep(item)
-
-        const status = cardStatus.find((o) => o.id === item.status)
-
-        this.form.status = status
       }
 
       this.$nextTick(() => {
@@ -97,19 +69,19 @@ export default {
     },
     processFormToSubmit() {
       const form = cloneDeep(this.form)
-      form.status = form.status.id
-      form.balance = parseInt(this.form.balance)
-      form.owner = form.owner._id
-      form.vehicle = form.vehicle._id
+      form.amount = parseInt(this.form.amount)
+      form.card = form.card._id
       return form
     },
     async addItem() {
       try {
         const form = this.processFormToSubmit()
         this.vForm = new Form(form)
-        await this.vForm.post(this.$axios.defaults.baseURL + '/monthly-cards')
+        await this.vForm.post(
+          this.$axios.defaults.baseURL + '/monthly-card-registers'
+        )
 
-        this.$notifyAddSuccess('vé tháng')
+        this.$notifyAddSuccess('đăng kí vé tháng')
         this.$refs.modal.hide()
         this.onActionSuccess()
       } catch (e) {
@@ -121,7 +93,9 @@ export default {
         const form = this.processFormToSubmit()
         this.vForm = new Form(form)
         await this.vForm.patch(
-          this.$axios.defaults.baseURL + '/monthly-cards/' + this.form._id
+          this.$axios.defaults.baseURL +
+            '/monthly-card-registers/' +
+            this.form._id
         )
 
         this.$notifyUpdateSuccess('vé tháng')
