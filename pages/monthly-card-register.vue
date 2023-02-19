@@ -36,7 +36,7 @@ const columns = [
     align: 'left',
     sortBy: 'asc',
     renderBodyCell: ({ row, column }, h) => {
-      return <span>{row.card._id}</span>
+      return <span>{row.card?._id}</span>
     },
   },
   {
@@ -45,7 +45,7 @@ const columns = [
     title: 'Chủ xe',
     align: 'left',
     renderBodyCell: ({ row, column }, h) => {
-      return <span>{row.card.owner.fullName}</span>
+      return <span>{row.card?.owner.fullName}</span>
     },
   },
   {
@@ -54,7 +54,7 @@ const columns = [
     title: 'Biển kiểm soát',
     align: 'left',
     renderBodyCell: ({ row, column }, h) => {
-      return <span>{row.card.vehicle.plateNumber}</span>
+      return <span>{row.card?.vehicle.plateNumber}</span>
     },
   },
   {
@@ -117,9 +117,9 @@ export default {
         .then(async (value) => {
           if (value) {
             await this.$axios.delete(
-              '/monthly-card-register/' + monthlyCardRegister._id
+              '/monthly-card-registers/' + monthlyCardRegister._id
             )
-            this.$notifyDeleteSuccess('vé')
+            this.$notifyDeleteSuccess('đăng kí vé')
             this.reloadData()
           }
         })

@@ -61,8 +61,8 @@ import cardStatus from '~/constants/monthly-card-status.constant'
 import MonthlyCardStatusSelect from '~/components/features/monthly-card/StatusSelect'
 
 const defaultForm = {
-  owner: '',
-  vehicle: '',
+  owner: {},
+  vehicle: {},
   status: null,
   balance: 0,
 }
@@ -99,6 +99,8 @@ export default {
       const form = cloneDeep(this.form)
       form.status = form.status.id
       form.balance = parseInt(this.form.balance)
+      form.owner = form.owner._id
+      form.vehicle = form.vehicle._id
       return form
     },
     async addItem() {

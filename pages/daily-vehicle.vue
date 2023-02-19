@@ -33,20 +33,20 @@ const columns = [
   },
   {
     field: 'plateNumber',
-    key: 'a',
+    key: 'b',
     title: 'Biển kiểm soát',
     align: 'left',
     sortBy: 'asc',
   },
   {
     field: 'type',
-    key: 'b',
+    key: 'c',
     title: 'Loại xe',
     align: 'left',
   },
   {
     field: 'description',
-    key: 'c',
+    key: 'd',
     title: 'Mô tả',
     align: 'left',
   },

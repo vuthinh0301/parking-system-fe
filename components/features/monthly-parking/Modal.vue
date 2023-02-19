@@ -105,7 +105,7 @@ import BaseFormModal from '~/components/base/form/Modal'
 
 const defaultForm = {
   card: '',
-  vehicle: '',
+  vehicle: {},
   checkin: 0,
   checkout: 0,
   checkinImageFront: '',
@@ -146,7 +146,10 @@ export default {
       this.isEdit = false
     },
     processFormToSubmit() {
-      return cloneDeep(this.form)
+      const form = cloneDeep(this.form)
+      form.vehicle = form.vehicle._id
+
+      return form
     },
     async addItem() {
       try {

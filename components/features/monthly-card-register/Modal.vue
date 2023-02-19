@@ -40,7 +40,7 @@ import { Form } from 'vform'
 import BaseFormModal from '~/components/base/form/Modal'
 
 const defaultForm = {
-  card: '',
+  card: {},
   balance: 0,
 }
 export default {
@@ -70,6 +70,7 @@ export default {
     processFormToSubmit() {
       const form = cloneDeep(this.form)
       form.amount = parseInt(this.form.amount)
+      form.card = form.card._id
       return form
     },
     async addItem() {
@@ -93,7 +94,7 @@ export default {
         this.vForm = new Form(form)
         await this.vForm.patch(
           this.$axios.defaults.baseURL +
-            '/monthly-card-rgister/' +
+            '/monthly-card-registers/' +
             this.form._id
         )
 
