@@ -112,8 +112,8 @@ export default {
   },
   methods: {
     convertHashToUrl(hash) {
-      const image = encodeURIComponent(hash) + '-300.jpg'
-      return process.env.imageHost + '/uploads/' + image
+      // const image = encodeURIComponent(hash) + '-300.jpg'
+      return hash
     },
     handleChange(ev) {
       this.uploadProgress = 0
