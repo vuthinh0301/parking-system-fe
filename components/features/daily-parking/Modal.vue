@@ -82,7 +82,7 @@
           rules="required"
         />
         <base-form-image-upload
-          v-model="form.checkinImageBehind"
+          v-model="form.checkoutImageBehind"
           class="ml-4"
           action="/files/upload-hash-image"
           accept="image/*"
