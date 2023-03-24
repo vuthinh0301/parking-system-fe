@@ -51,7 +51,7 @@ const columns = [
     title: 'Id phương tiện',
     align: 'left',
     renderBodyCell: ({ row, column }, h) => {
-      return <span>{row.vehicle._id}</span>
+      return <span>{row?.vehicle?._id}</span>
     },
   },
   {
@@ -61,7 +61,7 @@ const columns = [
     title: 'Biển kiểm soát',
     align: 'left',
     renderBodyCell: ({ row, column }, h) => {
-      return <span>{row.vehicle.plateNumber}</span>
+      return <span>{row?.vehicle?.plateNumber}</span>
     },
   },
   {

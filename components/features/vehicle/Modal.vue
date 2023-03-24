@@ -51,7 +51,7 @@
       />
       <base-form-image-upload
         v-model="form.image"
-        action="/files/upload-hash-image"
+        action="/files/upload-image"
         accept="image/*"
         preview-image
         label="Ảnh phương tiện"

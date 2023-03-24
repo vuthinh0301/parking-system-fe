@@ -17,8 +17,8 @@
     <base-form-text-input
       v-model="form.content"
       required
-      placeholder="Nội dung thanh toán"
-      label="Nội dung thanh toán"
+      placeholder="Id vé"
+      label="Id vé"
       rules="required|max:100"
       name="content"
     />
@@ -28,13 +28,21 @@
       :options="bankCodeOptions"
     ></b-form-select>
 
-    <b-button variant="primary" @click="createVnpayment">Submit</b-button>
-    <b-button type="reset" variant="danger">Reset</b-button>
+    <b-button
+      variant="primary"
+      style="margin-top: 16px"
+      @click="createVnpayment"
+      >Thanh toán</b-button
+    >
+    <b-button type="reset" variant="danger" style="margin-top: 16px"
+      >Làm mới</b-button
+    >
   </b-form>
 </template>
 
 <script>
 import cloneDeep from 'lodash/cloneDeep'
+
 const dateFormat = require('dateformat')
 
 const defaultForm = {
@@ -66,12 +74,31 @@ export default {
   },
 
   methods: {
+    sortObject(obj) {
+      const sorted = {}
+      const str = []
+      let key
+      for (key in obj) {
+        // eslint-disable-next-line no-prototype-builtins
+        if (obj.hasOwnProperty(key)) {
+          str.push(encodeURIComponent(key))
+        }
+      }
+      str.sort()
+      for (key = 0; key < str.length; key++) {
+        sorted[str[key]] = encodeURIComponent(obj[str[key]]).replace(
+          /%20/g,
+          '+'
+        )
+      }
+      return sorted
+    },
     createVnpayment() {
-      const ipAddr = '192.168.10.29' // sua ip
+      const ipAddr = '192.168.1.66' // sua ip
       const tmnCode = 'VMGTZWKJ'
       const secretKey = 'HVIGERDJEZGBRPMXWWVLLFRXXDIKVVBI'
       let vnpUrl = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'
-      const returnUrl = 'http://localhost:8000/order/vnpay_return'
+      const returnUrl = 'http://localhost:8000/return'
 
       const date = new Date()
 
@@ -85,7 +112,7 @@ export default {
       const locale = 'vn'
 
       const currCode = 'VND'
-      const vnpParams = {}
+      let vnpParams = {}
       vnpParams.vnp_Version = '2.1.0'
       vnpParams.vnp_Command = 'pay'
       vnpParams.vnp_TmnCode = tmnCode
@@ -103,7 +130,7 @@ export default {
         vnpParams.vnp_BankCode = bankCode
       }
 
-      // vnpParams = sortObject(vnpParams);
+      vnpParams = this.sortObject(vnpParams)
 
       const querystring = require('qs')
       const signData = querystring.stringify(vnpParams, { encode: false })
@@ -113,7 +140,7 @@ export default {
       vnpParams.vnp_SecureHash = signed
       // eslint-disable-next-line no-unused-vars
       vnpUrl += '?' + querystring.stringify(vnpParams, { encode: false })
-      console.log(signed, hmac)
+      window.location.href = vnpUrl
       console.log(vnpUrl)
     },
 

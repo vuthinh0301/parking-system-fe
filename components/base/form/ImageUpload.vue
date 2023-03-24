@@ -14,7 +14,7 @@
         ref="inputForm"
         v-model="innerValue"
         v-bind="$attrs"
-        action="/files/upload-hash-image"
+        action="/files/upload-image"
         accept="image/*"
         preview-image
         is-hash-image
