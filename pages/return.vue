@@ -17,6 +17,7 @@ export default {
       'vnp_ResponseCode'
     )
     amount = parseFloat(amount)
+    amount = amount / 100
     const createObj = { card: cardId, amount, transactionId }
 
     if (statusCode !== '00') {

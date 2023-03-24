@@ -72,6 +72,7 @@ export default {
     baseUrl: process.env.BASE_URL,
     imageHost: process.env.IMAGE_HOST,
     webUrl: process.env.WEB_URL,
+    vnp_ReturnUrl: process.env.returnUrl,
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

@@ -98,8 +98,8 @@ export default {
       const tmnCode = 'VMGTZWKJ'
       const secretKey = 'HVIGERDJEZGBRPMXWWVLLFRXXDIKVVBI'
       let vnpUrl = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'
+      // const returnUrl = 'http://localhost:8000/return'
       const returnUrl = process.env.vnp_ReturnUrl
-
       const date = new Date()
 
       const createDate = dateFormat(date, 'yyyymmddHHmmss')
